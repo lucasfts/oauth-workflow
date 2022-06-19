@@ -1,7 +1,7 @@
-# OAuth Workflow
+## OAuth Workflow
 This project is a simplified implementation of an authentication flow in the oauth2 pattern, several important details to ensure security in a real world scenario were purposely hidden to make it easier to understand.
 
-## Project Configuration
+### Project configuration
 Open a terminal or command prompt and run the following commands to clone the repository
 ```
     git clone https://github.com/lucasfts/oauth-workflow.git
