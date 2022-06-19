@@ -21,7 +21,7 @@ namespace ResourceServer.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> GetData()
+        public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
