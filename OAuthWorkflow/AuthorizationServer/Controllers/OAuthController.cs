@@ -10,7 +10,7 @@ namespace AuthorizationServer.Controllers
     [Route("[controller]")]
     public class OAuthController : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("authorize")]
         public ActionResult<string> Authorize()
         {
             var privateKey = System.IO.File.ReadAllText("private-key.pem");
@@ -28,9 +28,11 @@ namespace AuthorizationServer.Controllers
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha512)
             };
 
-            var token = new JwtSecurityTokenHandler().CreateToken(tokenDescriptor);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.CreateToken(tokenDescriptor);
+            var jwsToken = tokenHandler.WriteToken(jwtToken);
 
-            return Ok(token);
+            return Ok(jwsToken);
         }
     }
 }
