@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Client App</title>
+</head>
+<body>
+    <button onclick="anonymousRequest()">Anonymous request</button>
+    <button onclick="authenticatedRequest()">Authenticated request</button>
+    <div style="margin-top:10px" id="dataDiv"></div>
+
+    <script>
+        function anonymousRequest() {
+            requestData();
+        }
+
+        function authenticatedRequest() {
+            fetch("https://localhost:49153/oauth/authorize", { method: 'POST' })
+                .then(response => response.text())
+                .then(jwtToken => {
+                    requestData(jwtToken);
+                })
+                .catch(res => {
+                    console.log(res);
+                })
+        }
+
+        function requestData(jwtToken) {
+            var requestHeaders = {
+                'Authorization': `Bearer ${jwtToken}`,
+                'Content-Type': 'application/json'
+            }
+
+            fetch("https://localhost:49155/WeatherForecast", { headers: requestHeaders })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("dataDiv").innerHTML = JSON.stringify(data);
+                })
+                .catch(error => {
+                    document.getElementById("dataDiv").innerHTML = 'Error: ' + error.message;
+                });
+        }
+    </script>
+</body>
+</html>

@@ -32,6 +32,9 @@ builder.Services
 var defaultAuthPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 builder.Services.AddAuthorization(opt => opt.DefaultPolicy = defaultAuthPolicy);
 
+builder.Services.AddCors(opt => opt.AddDefaultPolicy(
+    p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
+);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -51,6 +54,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors();
 app.MapControllers();
 
 app.Run();
