@@ -13,7 +13,7 @@
         }
 
         function authenticatedRequest() {
-            fetch("https://localhost:49153/oauth/authorize", { method: 'POST' })
+            fetch("http://localhost:5001/oauth/authorize", { method: 'POST' })
                 .then(response => response.text())
                 .then(jwtToken => {
                     requestData(jwtToken);
@@ -29,7 +29,7 @@
                 'Content-Type': 'application/json'
             }
 
-            fetch("https://localhost:49155/WeatherForecast", { headers: requestHeaders })
+            fetch("http://localhost:5002/WeatherForecast", { headers: requestHeaders })
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("dataDiv").innerHTML = JSON.stringify(data);

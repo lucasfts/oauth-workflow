@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  auth-server:
+    build: AuthorizationServer
+    ports:
+      - "5001:80"
+  resource-server:
+    build: ResourceServer
+    ports:
+      - "5002:80"
+  client-app:
+    build: ClientApp
+    ports:
+      - "8080:80"

@@ -5,9 +5,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ResourceServer/ResourceServer.csproj", "ResourceServer/"]
+COPY ["ResourceServer.csproj", "ResourceServer/"]
 RUN dotnet restore "ResourceServer/ResourceServer.csproj"
-COPY . .
+COPY . ResourceServer/
 WORKDIR "/src/ResourceServer"
 RUN dotnet build "ResourceServer.csproj" -c Release -o /app/build
 
